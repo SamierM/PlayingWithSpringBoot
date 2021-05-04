@@ -1,12 +1,14 @@
 package com.luv2code.springdemo;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope("prototype")
 public class TennisCoach implements Coach {
 	
 	@Autowired
@@ -16,6 +18,21 @@ public class TennisCoach implements Coach {
 	public TennisCoach() {
 		System.out.println("Spring is within the default constructor of TennisCoach");
 	}
+	
+	//define init method
+	@PostConstruct
+	public void startupTasks() {
+		System.out.println(">> TennisCoach: Inside of startup tasks");
+	}
+	
+	
+	//define destroy method
+	@PreDestroy
+	public void cleanupTasks() {
+		System.out.println(">> TennisCoach: Inside of cleanup tasks");
+
+	}
+	
 	
 	public FortuneService getFortuneService() {
 		return fortuneService;
